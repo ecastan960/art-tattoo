@@ -1,0 +1,30 @@
+{
+  "name": "art-tattoo",
+  "version": "1.0.0",
+  "proxy": "http://127.0.0.1:5000",
+  "description": "art and tattoo ecommerce site",
+  "main": "server.js",
+  "repository": "https://github.com/ecastan960/art-tattoo.git",
+  "author": "estebanC <ecastan1@eafit.edu.co>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node backend/server",
+    "server": "nodemon backend/server",
+    "client": "yarn --cwd frontend/ dev",
+    "dev": "concurrently \"yarn server\" \"yarn client\" ",
+    "data:import": "node backend/seeder",
+    "data:destroy": "node backend/seeder -d"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.8.4"
+  },
+  "type": "module",
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.20"
+  }
+}

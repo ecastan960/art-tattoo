@@ -56,7 +56,7 @@ const productSchema = mongoose.Schema(
       required: true,
       default: 0
     },
-    countInStocks: {
+    countInStock: {
       type: Number,
       required: true,
       default: 0

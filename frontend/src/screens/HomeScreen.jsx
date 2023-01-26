@@ -20,6 +20,7 @@ const HomeScreen = () => {
 
   return (
     <>
+      <h1>Welcome to Art & Tattoo</h1>
       <h1>Latests Products</h1>
       {loading ? (
         <Loader />

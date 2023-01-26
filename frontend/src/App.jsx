@@ -8,6 +8,13 @@ import Footer from './components/Footer'
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
+import LoginScreen from './screens/LoginScreen';
+import RegisterScreen from './screens/RegisterScreen';
+import ProfileScreen from './screens/ProfileScreen';
+import ShippingScreen from './screens/ShippingScreen';
+import PaymentScreen from './screens/PaymentScreen';
+import PlaceOrderScreen from './screens/PlaceOrderScreen';
+import OrderScreen from './screens/OrderScreen';
 
 function App() {
 
@@ -16,11 +23,17 @@ function App() {
       <Header />
       <main className="py-3">
         <Container>
-          <h1>Welcome to Art & Tattoo</h1>
           <Routes>
-            <Route path='/' element={<HomeScreen />} exact />
+            <Route path='/order/:id' element={<OrderScreen />} />
+            <Route path='/login' element={<LoginScreen />} />
+            <Route path='/shipping' element={<ShippingScreen />} />
+            <Route path='/placeorder' element={<PlaceOrderScreen />} />
+            <Route path='/payment' element={<PaymentScreen />} />
             <Route path='/product/:id' element={<ProductScreen />} />
             <Route path='/cart/:id?' element={<CartScreen />} />
+            <Route path='/register' element={<RegisterScreen />} />
+            <Route path='/profile' element={<ProfileScreen />} />
+            <Route path='/' element={<HomeScreen />} exact />
           </Routes>
         </Container>
       </main>

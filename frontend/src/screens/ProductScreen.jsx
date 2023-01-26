@@ -7,7 +7,7 @@ import Loader from '../components/Loader';
 import Rating from '../components/Rating';
 import products from '../products';
 import {
-  listProductsDetails,
+  listProductDetails,
   createProductReview
 } from '../actions/productActions';
 
@@ -30,7 +30,7 @@ const ProductScreen = () => {
     //   setComment('');
     //   dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
     // }
-    dispatch(listProductsDetails(id));
+    dispatch(listProductDetails(id));
     // const fetchProduct = async () => {
     //   const { data } = await axios.get(`/api/products/${id}`);
     //   setProduct(data);

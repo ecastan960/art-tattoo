@@ -63,7 +63,7 @@ export const listProducts = () => async (dispatch) => {
 //   }
 // };
 
-export const listProductsDetails = (id) => async (dispatch) => {
+export const listProductDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
     const { data } = await axios.get(`/api/products/${id}`);
@@ -124,11 +124,11 @@ export const createProduct = () => async (dispatch, getState) => {
       }
     };
 
-    const {data} = await axios.post(`/api/products/`, {}, config);
+    const {data} = await axios.post(`/api/products`, {}, config);
 
     dispatch({
       type: PRODUCT_CREATE_SUCCESS,
-      payload: product
+      payload: data
     });
 
   } catch (error) {

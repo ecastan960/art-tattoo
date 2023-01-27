@@ -7,6 +7,9 @@
   "repository": "https://github.com/ecastan960/art-tattoo.git",
   "author": "estebanC <ecastan1@eafit.edu.co>",
   "license": "MIT",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "start": "node backend/server",
     "server": "nodemon backend/server",

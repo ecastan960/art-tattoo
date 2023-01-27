@@ -14,7 +14,7 @@ const getProducts = AsyncHandler(async (req, res) => {
   // const products = await Product.find({});
   // const products = await Product.find({...keyword});
   // res.json(products);
-  const pageSize = 2;
+  const pageSize = 8;
   const page = Number(req.query.pageNumber) || 1;
 
 

@@ -6,9 +6,8 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
 import { login } from '../actions/userActions';
-import { useNavigate } from 'react-router-dom';
 
-const LoginScreen = () => {
+const LoginScreen = ({ history, location }) => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -21,11 +20,10 @@ const LoginScreen = () => {
 
   const redirect = location.search ? location.search.split('=')[1] : '/';
 
-  let history = useNavigate();
 
   useEffect(() => {
     if (userInfo) {
-      history(redirect);
+      history.push(redirect);
     }
   }, [history, userInfo, redirect]);
 

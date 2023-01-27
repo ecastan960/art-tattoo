@@ -5,24 +5,25 @@ import Product from '../models/productModel.js';
 // @route  GET /api/products
 // @access  Public
 const getProducts = AsyncHandler(async (req, res) => {
-  const products = await Product.find({});
-  res.json(products);
-  // const pageSize = 2;
-  // const page = Number(req.query.pageNumber) || 1;
+  const keyword = req.query.keyword ? {
+    name: {
+      $regex: req.query.keyword,
+      $options: 'i'
+    }
+  } : {}
+  // const products = await Product.find({});
+  // const products = await Product.find({...keyword});
+  // res.json(products);
+  const pageSize = 2;
+  const page = Number(req.query.pageNumber) || 1;
 
 
-  // const keyword = req.query.keyword ? {
-  //   name: {
-  //     $regex: req.query.keyword,
-  //     $options: 'i'
-  //   }
-  // } : {}
 
-  // const count = await Product.countDocuments({...keyword})
+  const count = await Product.countDocuments({...keyword})
 
-  // const products = await Product.find({ ...keyword }).limit(pageSize).skip(pageSize * (page - 1));
+  const products = await Product.find({ ...keyword }).limit(pageSize).skip(pageSize * (page - 1));
 
-  // res.json({products, page, pages: Math.ceil(count / pageSize)});
+  res.json({products, page, pages: Math.ceil(count / pageSize)});
 });
 
 // @desc  Fetch single products
@@ -135,9 +136,7 @@ const createProductReview = AsyncHandler(async (req, res) => {
 
     product.numReviews = product.reviews.length;
 
-    product.rating =
-      product.review.reduce((acc, item) => item.rating + acc, 0) /
-      product.reviews.length;
+    product.rating = product.reviews.reduce((acc, item) => item.rating + acc, 0) /product.reviews.length;
 
     await product.save();
     res.status(201).json({ message: 'Review added' })

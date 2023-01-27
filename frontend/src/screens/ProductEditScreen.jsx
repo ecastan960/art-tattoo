@@ -8,14 +8,11 @@ import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
 import { listProductDetails, updateProduct } from '../actions/productActions';
 import { USER_UPDATE_RESET } from '../constants/userConstants';
-import { useNavigate } from 'react-router-dom';
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstants';
 
-const ProductEditScreen = () => {
+const ProductEditScreen = ({ match, history }) => {
 
-  const { id } = useParams();
-  const productId = id;
-  let history = useNavigate();
+  const productId = match.params.id;
 
   const [name, setName] = useState('');
   const [price, setPrice] = useState(0);
@@ -41,7 +38,7 @@ const ProductEditScreen = () => {
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: PRODUCT_UPDATE_RESET });
-      history('/admin/productlist')
+      history.push('/admin/productlist')
     } else {
       if (!product.name || product._id !== productId) {
         dispatch(listProductDetails(productId))
@@ -152,12 +149,12 @@ const ProductEditScreen = () => {
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
               ></Form.Control>
-              {/* <Form.File
+              <Form.File
                 id='image-file'
                 label='Choose File'
                 custom
                 onChange={uploadFileHandler}
-              ></Form.File>  */}
+              ></Form.File> 
               {uploading && <Loader/>} 
             </Form.Group>
 

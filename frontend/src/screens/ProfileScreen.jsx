@@ -6,11 +6,9 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { getUserDetails, updateUserProfile } from '../actions/userActions';
 import { listMyOrders } from '../actions/orderActions'
-import { useNavigate } from 'react-router-dom';
 
-const ProfileScreen = () => {
+const ProfileScreen = ({ location, history }) => {
 
-  let history = useNavigate();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -36,7 +34,7 @@ const ProfileScreen = () => {
 
   useEffect(() => {
     if (!userInfo) {
-      history('/login');
+      history.push('/login');
     } else {
       if (!user.name) {
         dispatch(getUserDetails('profile'))

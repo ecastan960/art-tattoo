@@ -1,6 +1,5 @@
 import express from 'express';
 import AsyncHandler from 'express-async-handler';
-// import { restart } from 'nodemon';
 import Product from '../models/productModel.js';
 import {
     getProducts,
@@ -40,7 +39,7 @@ const router = express.Router();
 router.route('/').get(getProducts).post(protect, admin, createProduct);
 // router.route('/:id').get(getProductById).delete(protect, admin, deleteProduct);
 router.route('/:id/reviews').post(protect, createProductReview);
-// router.get('/top', getTopProducts)
+router.get('/top', getTopProducts)
 router.route('/:id').get(getProductById).delete(protect, admin, deleteProduct).put(protect, admin, updateProduct);
 
 export default router;

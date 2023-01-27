@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import ReactDOM from "react-dom";
 import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Row, Col, ListGroup, Image, Card, Button } from 'react-bootstrap';
 import { PayPalButton } from "react-paypal-button-v2";
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import { useNavigate } from 'react-router-dom';
 import { getOrderDetails, payOrder, deliverOrder } from '../actions/orderActions';
 import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from '../constants/orderConstants';
 
-const OrderScreen = () => {
+const OrderScreen = ({ match, history }) => {
   const dispatch = useDispatch();
-  let history = useNavigate();
-  const { id } = useParams();
-  const orderId = id;
+  const orderId = match.params.id;
 
   const [sdkReady, setSdkReady] = useState(false);
 
@@ -40,8 +36,8 @@ const OrderScreen = () => {
   }
 
   useEffect(() => {
-    if(!userInfo) {
-      history('/login')
+    if (!userInfo) {
+      history.push('/login')
     }
     const addPayPalScript = async () => {
 
@@ -68,7 +64,7 @@ const OrderScreen = () => {
       document.body.appendChild(script)
       // setScriptPaypal(false) // added so the script is only loaded once
     }
-    addPayPalScript()
+    // addPayPalScript()
 
     if (!order || order._id !== orderId || successPay || successDeliver) {
       dispatch({ type: ORDER_PAY_RESET })
@@ -81,8 +77,8 @@ const OrderScreen = () => {
         setSdkReady(true)
       }
     }
-  // }, [dispatch, order, orderId, successPay, successDeliver])
-  }, [dispatch, orderId, successPay, order])
+  }, [dispatch, order, orderId, successPay, successDeliver])
+  // }, [dispatch, orderId, successPay, order])
 
   const successPaymentHandler = (paymentResult) => {
     // console.log(paymentResult)

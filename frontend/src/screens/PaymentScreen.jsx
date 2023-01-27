@@ -3,16 +3,14 @@ import { Form, Button, Col, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import FormContainer from '../components/FormContainer';
 import CheckoutSteps from '../components/CheckoutSteps';
-import { useNavigate } from 'react-router-dom';
 import { savePaymentMethod } from '../actions/cartActions';
 
-const PaymentScreen = () => {
+const PaymentScreen = ({ history }) => {
     const cart = useSelector(state => state.cart)
     const { shippingAddress } = cart;
-    let history = useNavigate();
 
     if (!shippingAddress) {
-        history('/shipping')
+        history.push('/shipping')
     }
 
     const [paymentMethod, setPaymentMethod] = useState('PayPal');
@@ -23,7 +21,7 @@ const PaymentScreen = () => {
     const submitHandler = (e) => {
         e.preventDefault();
         dispatch(savePaymentMethod(paymentMethod));
-        history('/placeorder');
+        history.push('/placeorder');
     }
 
     return (

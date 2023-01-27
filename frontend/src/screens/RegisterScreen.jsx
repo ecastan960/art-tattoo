@@ -6,9 +6,8 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
 import { register } from '../actions/userActions';
-import { useNavigate } from 'react-router-dom';
 
-const RegisterScreen = () => {
+const RegisterScreen = ({ history }) => {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -24,20 +23,19 @@ const RegisterScreen = () => {
 
   const redirect = location.search ? location.search.split('=')[1] : '/';
 
-  let history = useNavigate();
 
   useEffect(() => {
     if (userInfo) {
-      history(redirect);
+      history.push(redirect);
     }
   }, [history, userInfo, redirect]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if(password !== confirmPassword) {
-        setMessage('Passwords do not match');
+    if (password !== confirmPassword) {
+      setMessage('Passwords do not match');
     } else {
-        dispatch(register(name,email,password))
+      dispatch(register(name, email, password))
     }
 
   };

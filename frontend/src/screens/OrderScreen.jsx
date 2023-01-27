@@ -22,8 +22,8 @@ const OrderScreen = () => {
   const orderDetails = useSelector(state => state.orderDetails);
   const { order, loading, error } = orderDetails;
 
-  // const orderLogin = useSelector(state => state.orderLogin);
-  // const { userInfo } = orderLogin;
+  const userLogin = useSelector(state => state.userLogin);
+  const { userInfo } = userLogin;
 
   const orderPay = useSelector(state => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
@@ -40,9 +40,9 @@ const OrderScreen = () => {
   }
 
   useEffect(() => {
-    // if(!userInfo) {
-    //   history('/login')
-    // }
+    if(!userInfo) {
+      history('/login')
+    }
     const addPayPalScript = async () => {
 
       const { data: clientId } = await axios.get('/api/config/paypal');
@@ -187,7 +187,7 @@ const OrderScreen = () => {
                 </ListGroup.Item>
                 {!order.isPaid && (
                   <ListGroup.Item>
-                    {loading && <Loader />}
+                    {loadingPay && <Loader />}
                     {!sdkReady ? (
                       <Loader />
                     ) : (
@@ -199,13 +199,13 @@ const OrderScreen = () => {
                   </ListGroup.Item>
                 )}
                 {loadingDeliver && <Loader />}
-                {/* {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
                   <ListGroup.Item>
                     <Button type="button" className="btn btn-block" onClick={deliverHandler}>
                       Mark as Delivered
                     </Button>
                   </ListGroup.Item>
-                )} */}
+                )}
               </ListGroup>
             </Card>
           </Col>
